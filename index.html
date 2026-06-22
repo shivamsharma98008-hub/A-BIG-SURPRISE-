@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Taniya's Storybook 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Poppins',sans-serif;
+overflow:hidden;
+background:linear-gradient(-45deg,
+#ffd1e8,
+#ffc0e1,
+#ffe8f4,
+#fff2fa);
+background-size:400% 400%;
+animation:bgMove 12s ease infinite;
+}
+
+@keyframes bgMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+.slide{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100vh;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+padding:20px;
+
+opacity:0;
+transform:translateX(100px) scale(.95);
+transition:all .9s ease;
+
+pointer-events:none;
+}
+
+.slide.active{
+opacity:1;
+transform:translateX(0) scale(1);
+pointer-events:auto;
+}
+
+.card{
+max-width:900px;
+width:95%;
+
+background:rgba(255,255,255,.78);
+
+backdrop-filter:blur(18px);
+
+border-radius:35px;
+
+padding:35px;
+
+box-shadow:
+0 15px 40px rgba(255,105,180,.18);
+
+position:relative;
+overflow:hidden;
+}
+
+.card::before{
+content:"🦄";
+position:absolute;
+top:10px;
+right:15px;
+font-size:35px;
+}
+
+.card::after{
+content:"🎀";
+position:absolute;
+bottom:10px;
+left:15px;
+font-size:30px;
+}
+
+h1,h2{
+font-family:'Pacifico',cursive;
+color:#ff4fa2;
+margin-bottom:18px;
+}
+
+p{
+line-height:1.8;
+font-size:1.05rem;
+}
+
+img{
+max-width:90%;
+max-height:60vh;
+
+border-radius:25px;
+
+border:6px solid white;
+
+box-shadow:
+0 15px 30px rgba(0,0,0,.15);
+
+transition:.5s;
+}
+
+img:hover{
+transform:scale(1.03);
+}
+
+.progress{
+position:fixed;
+top:0;
+left:0;
+
+width:0%;
+height:8px;
+
+background:#ff4fa2;
+
+z-index:999;
+transition:.4s;
+}
+
+.nav{
+position:fixed;
+bottom:20px;
+left:50%;
+transform:translateX(-50%);
+
+display:flex;
+gap:12px;
+
+z-index:999;
+}
+
+.nav button{
+border:none;
+outline:none;
+
+padding:13px 25px;
+
+border-radius:50px;
+
+background:#ff69b4;
+color:white;
+
+font-weight:700;
+
+cursor:pointer;
+
+box-shadow:
+0 8px 18px rgba(255,105,180,.3);
+
+transition:.3s;
+}
+
+.nav button:hover{
+transform:translateY(-3px);
+}
+
+.float{
+position:fixed;
+pointer-events:none;
+animation:floatUp 18s linear infinite;
+z-index:-1;
+}
+
+@keyframes floatUp{
+from{
+transform:translateY(110vh);
+}
+to{
+transform:translateY(-120vh);
+}
+}
+
+#lockScreen{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.lockCard{
+
+background:rgba(255,255,255,.8);
+
+padding:40px;
+
+border-radius:35px;
+
+text-align:center;
+
+width:90%;
+max-width:600px;
+
+box-shadow:
+0 15px 40px rgba(255,105,180,.25);
+}
+
+.heartLock{
+font-size:90px;
+animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+50%{
+transform:scale(1.12);
+}
+}
+
+input{
+padding:14px;
+width:250px;
+
+border:none;
+outline:none;
+
+border-radius:50px;
+
+text-align:center;
+font-size:16px;
+}
+
+.unlockBtn{
+margin-top:15px;
+
+border:none;
+
+padding:12px 25px;
+
+border-radius:50px;
+
+background:#ff69b4;
+color:white;
+
+font-weight:bold;
+
+cursor:pointer;
+}
+
+.typewriter{
+font-size:1.15rem;
+min-height:120px;
+}
+
+.letter{
+text-align:left;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="progress" id="progress"></div>
+
+<div id="lockScreen">
+
+<div class="lockCard">
+
+<div class="heartLock">💖</div>
+
+<h1>For Taniya Only</h1>
+
+<p>
+A collection of smiles,
+imagination,
+memories,
+and a whole lot of love.
+</p>
+
+<br>
+
+<p>
+✨ Enter the magical date to begin your journey ✨
+</p>
+
+<br>
+
+<input
+type="password"
+id="password"
+placeholder="Enter Password">
+
+<br>
+
+<button
+class="unlockBtn"
+onclick="unlockStory()">
+Unlock Story 💕
+</button>
+
+</div>
+
+</div>
+
+<div id="storyContainer" style="display:none;">
+<!-- INTRO -->
+
+<div class="slide active">
+
+<div class="card">
+
+<h1>✨ A Little Journey Through Taniya's Story ✨</h1>
+
+<p>
+Everyone has a story.
+</p>
+
+<p>
+Some stories are written in books.
+</p>
+
+<p>
+Some are written in photographs.
+</p>
+
+<p>
+And some are written in the hearts of the people who care about us. 💖
+</p>
+
+<br>
+
+<p>
+Today isn't about looking back.
+</p>
+
+<p>
+It's about celebrating every beautiful version of you. 🌸
+</p>
+
+</div>
+
+</div>
+
+
+<!-- BABY INTRO -->
+
+<div class="slide">
+
+<div class="card">
+
+<h2>👶 Chapter 1</h2>
+
+<div class="typewriter">
+
+Waittt Maatteeeee... 🥹💕
+
+Before you see the next picture...
+
+imagine the tiniest version of yourself.
+
+Tiny hands.
+
+Tiny feet.
+
+And already enough cuteness to melt hearts. 💖
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- PHOTO 1 -->
+
+<div class="slide">
+
+<div class="card">
+
+<img src="year1.1.jpg">
+
+<br><br>
+
+<p>
+👶 Level 1 Taniya Unlocked
+</p>
+
+<p>
+💖 Cuteness: 100%
+</p>
+
+<p>
+🦄 Pookie Energy: Unlimited
+</p>
+
+</div>
+
+</div>
+
+
+<!-- BABY TRANSITION -->
+
+<div class="slide">
+
+<div class="card">
+
+<h2>💌</h2>
+
+<p>
+Hold on dearrrrr...
+</p>
+
+<p>
+The next one is somehow even cuter.
+</p>
+
+<p>
+I don't know how that's possible either. 🦄✨
+</p>
+
+</div>
+
+</div>
+
+
+<!-- PHOTO 2 -->
+
+<div class="slide">
+
+<div class="card">
+
+<img src="year1.2.jpeg">
+
+<br><br>
+
+<p>
+The world wasn't ready for this much adorable energy. 🌸
+</p>
+
+</div>
+
+</div>
+
+
+<!-- AGE 2-3 INTRO -->
+
+<div class="slide">
+
+<div class="card">
+
+<h2>🎀 2–3 Years Old</h2>
+
+<p>
+🌈 New Chapter Unlocked
+</p>
+
+<br>
+
+<p>
+A little older.
+</p>
+
+<p>
+A little taller.
+</p>
+
+<p>
+Still absolutely adorable. 🦄💕
+</p>
+
+</div>
+
+</div>
+
+
+<!-- PHOTO 3 -->
+
+<div class="slide">
+
+<div class="card">
+
+<img src="year3.1.jpg">
+
+<br><br>
+
+<p>
+👑 Princess Mode Activated
+</p>
+
+<p>
+Tiny princess.
+Big happiness.
+</p>
+
+</div>
+
+</div>
+
+
+<!-- TRANSITION -->
+
+<div class="slide">
+
+<div class="card">
+
+<h2>💖 Pookie Alert</h2>
+
+<p>
+Warning:
+</p>
+
+<p>
+Heart-stealing ability detected. 💌
+</p>
+
+<p>
+Proceed with caution.
+</p>
+
+</div>
+
+</div>
+
+
+<!-- PHOTO 4 -->
+
+<div class="slide">
+
+<div class="card">
+
+<img src="year3.2.jpg">
+
+<br><br>
+
+<p>
+Certified adorable since day one. 💕
+</p>
+
+</div>
+
+</div>
+
+
+<!-- AGE 7-8 INTRO -->
+
+<div class="slide">
+
+<div class="card">
+
+<h2>🌸 7–8 Years Old</h2>
+
+<p>
+Main Character Energy Detected ✨
+</p>
+
+<br>
+
+<p>
+This is where the adventures begin.
+</p>
+
+<p>
+The smiles get bigger.
+</p>
+
+<p>
+The dreams get brighter.
+</p>
+
+<p>
+And the story becomes even more beautiful. 💖
+</p>
+
+</div>
+
+</div>
+
+
+<!-- PHOTO 5 -->
+
+<div class="slide">
+
+<div class="card">
+
+<img src="year7.1.jpg">
+
+<br><br>
+
+<p>
+A heart full of dreams and adventures. 🌸
+</p>
+
+</div>
+
+</div>
+
+
+<!-- TRANSITION -->
+
+<div class="slide">
+
+<div class="card">
+
+<h2>✨</h2>
+
+<p>
+My favourite human was already becoming awesome. 🌟
+</p>
+
+<p>
+The next chapter is waiting...
+</p>
+
+</div>
+
+</div>
+
+
+<!-- PHOTO 6 -->
+
+<div class="slide">
+
+<div class="card">
+
+<img src="year7.2.jpg">
+
+<br><br>
+
+<p>
+Pure sunshine in human form. ☀️💕
+</p>
+
+</div>
+
+</div>
+<!-- AGE 14-15 INTRO -->
+
+<div class="slide">
+
+<div class="card">
+
+<h2>🌷 14–15 Years Old</h2>
+
+<p>
+🎀 Plot Twist:
+</p>
+
+<br>
+
+<p>
+The cute little princess is slowly turning into the amazing person everyone knows today.
+</p>
+
+<p>
+Glow-up chapter incoming... 💫
+</p>
+
+</div>
+
+</div>
+
+
+<!-- PHOTO 7 -->
+
+<div class="slide">
+
+<div class="card">
+
+<img src="year14.1.jpg">
+
+<br><br>
+
+<p>
+Confidence Level: Increasing ✨
+</p>
+
+<p>
+Still stealing hearts without even trying. 💖
+</p>
+
+</div>
+
+</div>
+
+
+<!-- TRANSITION -->
+
+<div class="slide">
+
+<div class="card">
+
+<h2>💌</h2>
+
+<p>
+Waittt Maattaaaaa...
+</p>
+
+<p>
+We're getting very close to the final version.
+</p>
+
+<p>
+And honestly...
+</p>
+
+<p>
+Every chapter has been adorable. 🌸
+</p>
+
+</div>
+
+</div>
+
+
+<!-- PHOTO 8 -->
+
+<div class="slide">
+
+<div class="card">
+
+<img src="year14.2.jpg">
+
+<br><br>
+
+<p>
+Still Bachhaaa.
+</p>
+
+<p>
+Just taller. 😂💖
+</p>
+
+</div>
+
+</div>
+
+
+<!-- AGE 17 INTRO -->
+
+<div class="slide">
+
+<div class="card">
+
+<h2>💖 Final Chapter</h2>
+
+<p>
+And here she is...
+</p>
+
+<br>
+
+<p>
+My Favourite Human.
+</p>
+
+<p>
+The girl behind all the smiles,
+the laughter,
+the memories,
+and the chaos. 🌍✨
+</p>
+
+</div>
+
+</div>
+
+
+<!-- PHOTO 9 -->
+
+<div class="slide">
+
+<div class="card">
+
+<img src="year17.1.jpg">
+
+<br><br>
+
+<p>
+💖 My Favourite Human
+</p>
+
+<p>
+One of the brightest parts of my days.
+</p>
+
+</div>
+
+</div>
+
+
+<!-- FINAL TRANSITION -->
+
+<div class="slide">
+
+<div class="card">
+
+<h2>🎀 One Last Reveal</h2>
+
+<p>
+Before we reach the end...
+</p>
+
+<p>
+Here's one more photo of someone very special. 💕
+</p>
+
+</div>
+
+</div>
+
+
+<!-- PHOTO 10 -->
+
+<div class="slide">
+
+<div class="card">
+
+<img src="year17.2.jpg">
+
+<br><br>
+
+<p>
+🌍 My World
+</p>
+
+<p>
+The prettiest chapter so far. ✨💕
+</p>
+
+</div>
+
+</div>
+
+
+<!-- LETTER -->
+
+<div class="slide">
+
+<div class="card letter" style="
+max-height:75vh;
+overflow-y:auto;
+padding-right:15px;
+">
+
+<h2>💌 A Little Letter For You</h2>
+
+<p>
+Dear Taniya,
+</p>
+
+<br>
+
+<p>
+You once said you don't really have childhood photos.
+</p>
+
+<p>
+And honestly...
+</p>
+
+<p>
+that felt a little unfair.
+</p>
+
+<p>
+Because someone as special as you deserves memories she can look back on.
+</p>
+
+<p>
+So even if these photos aren't real,
+</p>
+
+<p>
+the thought behind them is.
+</p>
+
+<p>
+Maybe I couldn't be there when you were 1 year old.
+</p>
+
+<p>
+Maybe I couldn't see the little princess running around at 7 years old.
+</p>
+
+<p>
+But thanks to a little imagination,
+</p>
+
+<p>
+I got to see those versions of you too.
+</p>
+
+<p>
+And after seeing every chapter...
+</p>
+
+<p>
+I can confidently say something:
+</p>
+
+<p>
+💖 Every version of you would've been my favourite.
+</p>
+
+<p>
+The tiny baby.
+</p>
+
+<p>
+The little princess.
+</p>
+
+<p>
+The growing dreamer.
+</p>
+
+<p>
+And the amazing person you are today.
+</p>
+
+<p>
+Thank you for being part of my life.
+</p>
+
+<p>
+Thank you for the laughs.
+</p>
+
+<p>
+Thank you for the memories.
+</p>
+
+<p>
+Thank you for being my Besttiieee.
+</p>
+
+<p>
+Thank you for being my Maattaaaaa.
+</p>
+
+<p>
+Thank you for being my world on some of my worst days and one of the biggest reasons for my best ones.
+</p>
+
+<p>
+And thank you for proving that some people can make life brighter simply by existing.
+</p>
+
+<p>
+no matters you love me or not but i loves you but trust me if efforts matters,
+i'll put my 100% till my last breath, and then what destiny says i never mind
+ i'll wait....
+</p>
+
+<p> 
+No matter what age,
+what chapter,
+or what version of you...
+</p>
+
+<p>
+you've always been someone worth appreciating.
+</p>
+
+<p>
+✨💕
+</p>
+
+<p>
+— Someone who's really grateful that you're in their life.
+</p>
+
+</div>
+
+</div>
+<!-- FINAL ACHIEVEMENT SCREEN -->
+
+<div class="slide">
+
+<div class="card">
+
+<h1>🎉 Achievement Unlocked 🎉</h1>
+
+<br>
+
+<p>💖 World's Cutest Human</p>
+
+<p>🦄 Certified Pookie</p>
+
+<p>🌸 Professional Heart Stealer</p>
+
+<p>✨ Main Character Energy</p>
+
+<p>🌍 One Of My Favourite People</p>
+
+<p>🎀 17 Years Of Being Awesome</p>
+
+<br>
+
+<h2>Thank You For Being You 💕</h2>
+
+<p>
+Some people leave footprints.
+</p>
+
+<p>
+You leave happiness.
+</p>
+
+<p>
+And for that...
+</p>
+
+<p>
+I'll always be grateful. 💖
+</p>
+
+</div>
+
+</div>
+
+<!-- NAVIGATION -->
+
+<div class="nav">
+
+<button onclick="prevSlide()">
+⬅ Prev
+</button>
+
+<button onclick="nextSlide()">
+Next ➡
+</button>
+
+</div>
+
+<!-- MUSIC -->
+
+<audio id="bgMusic" loop>
+
+<source src="music.mp3" type="audio/mpeg">
+
+</audio>
+
+</div>
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+/* PASSWORD */
+
+function unlockStory(){
+
+let pass =
+document.getElementById("password").value;
+
+if(pass === "24122008"){
+
+document.getElementById("lockScreen").style.display = "none";
+
+document.getElementById("storyContainer").style.display = "block";
+
+document.getElementById("bgMusic")
+.play()
+.catch(()=>{});
+
+}
+
+else{
+
+alert("Wrong Password 💔");
+
+}
+
+}
+
+/* SLIDES */
+
+const slides =
+document.querySelectorAll(".slide");
+
+let current = 0;
+
+function showSlide(index){
+
+slides[current].classList.remove("active");
+
+current =
+(index + slides.length)
+% slides.length;
+
+slides[current].classList.add("active");
+
+document.getElementById("progress")
+.style.width =
+((current+1)/slides.length)*100 + "%";
+
+}
+
+function nextSlide(){
+
+showSlide(current+1);
+
+}
+
+function prevSlide(){
+
+showSlide(current-1);
+
+}
+
+showSlide(0);
+
+/* KEYBOARD */
+
+document.addEventListener("keydown",(e)=>{
+
+if(e.key==="ArrowRight"){
+
+nextSlide();
+
+}
+
+if(e.key==="ArrowLeft"){
+
+prevSlide();
+
+}
+
+});
+
+/* MOBILE SWIPE */
+
+let startX = 0;
+
+document.addEventListener("touchstart",(e)=>{
+
+startX =
+e.touches[0].clientX;
+
+});
+
+document.addEventListener("touchend",(e)=>{
+
+let endX =
+e.changedTouches[0].clientX;
+
+let diff =
+endX - startX;
+
+if(diff < -50){
+
+nextSlide();
+
+}
+
+if(diff > 50){
+
+prevSlide();
+
+}
+
+});
+
+/* FLOATING STICKERS */
+
+const stickers = [
+
+"💖",
+"🦄",
+"🌈",
+"✨",
+"🎀",
+"☁️",
+"🌸",
+"🧸",
+"💕",
+"🍓"
+
+];
+
+for(let i=0;i<120;i++){
+
+let item =
+document.createElement("div");
+
+item.className =
+"float";
+
+item.innerHTML =
+stickers[
+Math.floor(
+Math.random()*stickers.length
+)
+];
+
+item.style.left =
+Math.random()*100 + "vw";
+
+item.style.fontSize =
+(16 + Math.random()*26)
++ "px";
+
+item.style.animationDuration =
+(12 + Math.random()*12)
++ "s";
+
+item.style.animationDelay =
+Math.random()*15 + "s";
+
+document.body.appendChild(item);
+
+}
+
+/* CONFETTI EFFECT ON FINAL SLIDE */
+
+function createConfetti(){
+
+for(let i=0;i<80;i++){
+
+let c =
+document.createElement("div");
+
+c.innerHTML =
+["💖","✨","🎀","🌸"][Math.floor(Math.random()*4)];
+
+c.style.position="fixed";
+
+c.style.left=
+Math.random()*100+"vw";
+
+c.style.top="-20px";
+
+c.style.fontSize=
+(15+Math.random()*20)+"px";
+
+c.style.pointerEvents="none";
+
+c.style.zIndex="9999";
+
+c.style.transition="4s linear";
+
+document.body.appendChild(c);
+
+setTimeout(()=>{
+
+c.style.transform=
+"translateY(120vh) rotate(720deg)";
+
+},50);
+
+setTimeout(()=>{
+
+c.remove();
+
+},4500);
+
+}
+
+}
+
+/* AUTO CONFETTI ON LAST SLIDE */
+
+setInterval(()=>{
+
+if(current === slides.length-1){
+
+createConfetti();
+
+}
+
+},3000);
+
+</script>
+
+</body>
+</html>
